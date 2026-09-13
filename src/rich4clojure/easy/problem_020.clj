@@ -9,7 +9,22 @@
 ;; Write a function which returns the second to last
 ;; element from a sequence.
 
-(def __ :tests-will-fail)
+(def __1 #(nth % (dec (dec (count %))))) :tests-will-fail
+(def __2 #(first (take-last 2 %)))
+(def __3 #(-> %
+              reverse
+              second))
+(def __4 #(second (reverse %)))
+(def __5 (comp second reverse))
+
+(defn pipe_ [& fns]
+  (fn [x]
+   (reduce (fn [acc f] (f acc)) x fns)))
+
+(defn pipe [& fns]
+  #(reduce (fn [acc f] (f acc)) % fns))
+
+(def __ (pipe reverse second))
 
 (comment
   

@@ -20,7 +20,7 @@
   )
 
 (tests
-  __ :=
+  [7 6 5 4 3] :=
   (loop [x 5
          result []]
     (if (> x 0)

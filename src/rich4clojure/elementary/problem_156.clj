@@ -18,10 +18,24 @@
 ;; default value and a sequence of keys and constructs a
 ;; map.
 
-(def __ :tests-will-fail)
+(def __ ;:tests-will-fail
+  (fn [v ks]
+    (loop [m {} 
+           ks ks]
+      (if (empty? ks)
+          m
+          (recur (conj m [(first ks) v]) (rest ks)))))
+  )
 
 (comment
-  
+  (conj {:d 0}
+        [:a 0]
+        [:b 0]
+        [:c 0])
+  (loop [m {} ks [:a :b :c] v 0]
+    (if (empty? ks)
+      m
+      (recur (conj m [(first ks) v]) (rest ks) v)))
   )
 
 (tests

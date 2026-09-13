@@ -10,16 +10,29 @@
 ;; true iff the map contains an entry with that key and
 ;; its value is nil.
 
-(def __ :tests-will-fail)
+(comment
+(def __ ;:tests-will-fail
+  (fn [k m]
+    (and 
+     (contains? m k) 
+     (nil? (get m k))
+     )))
+)
+
+(defn __ [key map] (nil? (get map key false)))
 
 (comment
+(__ :a {:a nil :b 2})
+(__ :b {:a nil :b 2})
+(__ :c {:a nil :b 2})
   
   )
 
 (tests
   (__ :a {:a nil :b 2}) :=
   (__ :b {:a nil :b 2}) :=
-  (__ :c {:a nil :b 2}) :=)
+  (__ :c {:a nil :b 2}) :=
+ )
 
 ;; Share your solution, and/or check how others did it:
 ;; https://gist.github.com/70ba70e1e4e0f249a90bc99bda5f8aff

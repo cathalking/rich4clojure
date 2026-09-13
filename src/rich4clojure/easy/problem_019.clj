@@ -11,7 +11,22 @@
 
 (def restricted [last])
 
-(def __ :tests-will-fail)
+(def __1 (fn [s]
+          (first (reverse s))) #_:tests-will-fail)
+(def __2 (fn [c]
+          (loop [f (first c)
+                 r (rest c)]
+            (if (empty? r)
+              f
+              (recur (first r) (rest r))))) #_:tests-will-fail)
+(def __3  #(loop [f (first %)
+                   r (rest %)]
+              (if (empty? r)
+                f
+                (recur (first r) (rest r)))) #_:tests-will-fail)
+(def __4 (fn [c]
+           (reduce (fn [_ b] b) c)))
+(def __ #(reduce (fn [_ b] b) %))
 
 (comment
   

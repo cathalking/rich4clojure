@@ -21,8 +21,12 @@
   )
 
 (tests
-  (__ (sort (rest (reverse [2 5 4 1 3 6])))) :=
-   (-> [2 5 4 1 3 6] (reverse) (rest) (sort) (__))
+  (last (sort (rest (reverse [2 5 4 1 3 6])))) :=
+   (-> [2 5 4 1 3 6] 
+       (reverse) 
+       (rest) 
+       (sort) 
+       (last))
    5)
 
 ;; Share your solution, and/or check how others did it:

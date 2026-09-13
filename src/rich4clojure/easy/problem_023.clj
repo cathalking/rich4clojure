@@ -10,8 +10,16 @@
 
 (def restricted [reverse rseq])
 
-(def __ :tests-will-fail)
+(def __1 
+  (fn [s]
+    (reduce (fn [acc b] (cons b acc)) [] s)))
 
+(def __2 
+  #(reduce (fn [acc b] (cons b acc)) [] %))
+
+(def __
+  (let [rdcr #(cons %2 %1)]
+    #(reduce rdcr [] %)))
 (comment
   
   )

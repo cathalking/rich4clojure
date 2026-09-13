@@ -14,9 +14,9 @@
   )
 
 (tests
-  (__ "Dave") := "Hello, Dave!"
-  (__ "Jenn") := "Hello, Jenn!"
-  (__ "Rhea") := "Hello, Rhea!")
+ ((fn greet [name] (str "Hello, " name "!")) "Dave") := "Hello, Dave!" 
+ (#(str "Hello, " % "!") "Jenn") := "Hello, Jenn!"
+  ((fn [n] (str "Hello, " n "!")) "Rhea") := "Hello, Rhea!")
 
 ;; Share your solution, and/or check how others did it:
 ;; https://gist.github.com/60e1accc59d5c5783365ab46d47eb78b

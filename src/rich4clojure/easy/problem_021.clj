@@ -11,11 +11,28 @@
 
 (def restricted [nth])
 
-(def __ :tests-will-fail)
+(def __1 (fn [s n] 
+          (loop [s s
+                 n n]
+            (if (zero? n)
+              (first s)
+              (recur (rest s) (dec n))))))
+(def __2 
+  #(loop [s %1
+          n %2]
+     (if (zero? n)
+       (first s)
+       (recur (rest s) (dec n)))))
 
-(comment
-  
-  )
+(def __3 #(first (drop %2 %1)))
+
+(def __ (fn [s n] 
+           (if (zero? n)
+             (first s)
+             (recur (rest s) (dec n)))))
+
+  (comment
+    )
 
 (tests
   (__ '(4 5 6 7) 2) := 6

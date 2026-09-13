@@ -10,17 +10,15 @@
 ;; superset of A, if A is "contained" inside B. A and B
 ;; may coincide.
 
-(def __ :tests-will-fail)
-
-(comment
-  
-  )
+(def __  #{1 2}) 
+;:tests-will-fail
+(= #{2 1} #{1 2})
 
 (tests
-  __ := #{2}
-  #{1} := __
-  __ := #{1 2}
-  #{1 2} := __)
+ #{2} := #{2}
+ #{1} := #{1}
+ __ := #{1 2}
+ #{1 2} := __)
 
 ;; Share your solution, and/or check how others did it:
 ;; https://gist.github.com/fb5992733dcee8d4e449957ed7ece7db

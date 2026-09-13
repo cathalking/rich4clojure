@@ -10,7 +10,8 @@
 ;; logical falsity in conditional tests - anything else is
 ;; logical truth.
 
-(def __ :tests-will-fail)
+(def __ 1 ;:tests-will-fail
+  )
 
 (comment
   

@@ -14,9 +14,12 @@
 ;; in mind, read over these for expressions and try to see
 ;; how each of them produces the same result.
 
-(def __ :tests-will-fail)
+(def __ '(1 5 9 13 17 21 25 29 33 37)
+  ;:tests-will-fail
+  )
 
 (comment
+  (map inc (take-while #(< % 40) (iterate #(+ 4 %) 0)))
   
   )
 
