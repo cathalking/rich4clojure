@@ -9,18 +9,18 @@
 ;; Write a function which returns the sum of a sequence of
 ;; numbers.
 
-(def __ :tests-will-fail)
+(def __1 #(reduce + %))
 
-(comment
-  
-  )
+(def __ #(apply + %))
+
+(comment)
 
 (tests
-  (__ [1 2 3]) := 6
-  (__ (list 0 -2 5 5)) := 8
-  (__ #{4 2 1}) := 7
-  (__ '(0 0 -1)) := -1
-  (__ '(1 10 3)) := 14)
+ (__ [1 2 3]) := 6
+ (__ (list 0 -2 5 5)) := 8
+ (__ #{4 2 1}) := 7
+ (__ '(0 0 -1)) := -1
+ (__ '(1 10 3)) := 14)
 
 ;; Share your solution, and/or check how others did it:
 ;; https://gist.github.com/feb88ed305b672c9897330561da6b331

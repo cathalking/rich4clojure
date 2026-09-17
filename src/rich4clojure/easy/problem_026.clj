@@ -9,11 +9,32 @@
 ;; Write a function which returns the first X fibonacci
 ;; numbers.
 
-(def __ :tests-will-fail)
+(def __1 (fn [x]
+          (loop [i 1
+                 acc '()]
+            (if (> (+ i 1) x)
+              acc
+              (recur (inc i) (cons (+ (last acc) i) acc))))))
+
+(def __2 (fn [x]
+          (loop [i 0
+                 j 1]
+            (if (>= i x)
+              j
+              (recur i (+ i j))))))
+
+(def __ (fn[x]
+          (loop [acc '(1)]
+            (if (= x (count acc))
+              (reverse acc)
+              (recur (cons (apply + (take 2 acc)) acc))))))
+(__ 2)
+(let [acc '(2 1 1 0)]
+  (cons (apply + (take 2 acc)) acc))
 
 (comment
+ cons)  
   
-  )
 
 (tests
   (__ 3) := '(1 1 2)

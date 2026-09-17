@@ -17,12 +17,14 @@
 (def __2 
   #(reduce (fn [acc b] (cons b acc)) [] %))
 
-(def __
+(def __3
   (let [rdcr #(cons %2 %1)]
     #(reduce rdcr [] %)))
+
+(def __ #(reduce conj () %))
+
 (comment
-  
-  )
+  butlast)
 
 (tests
   (__ [1 2 3 4 5]) := [5 4 3 2 1]
