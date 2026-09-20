@@ -9,9 +9,19 @@
 ;; Write a function which removes consecutive duplicates
 ;; from a sequence.
 
-(def __ :tests-will-fail)
+(defn a [s]
+  (->> s
+       (reduce (fn [a b]
+                 (if (= (last a) b) 
+                   a
+                   (conj a b))) [])
+       seq))
 
+(def __ a)
 (comment
+  (reduce + [1 2 3 4])
+  (a [1 1 2 3 3 2 2 3])
+  (a [[1 2] [1 2] [3 4] [1 2]])
   
   )
 
