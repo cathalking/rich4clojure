@@ -17,12 +17,16 @@
                    (conj a b))) [])
        seq))
 
+(def b #(map first (partition-by identity %)))
+
 (def __ a)
 (comment
   (reduce + [1 2 3 4])
   (a [1 1 2 3 3 2 2 3])
   (a [[1 2] [1 2] [3 4] [1 2]])
   
+  (b [1 1 2 3 3 2 2 3])
+  (b [[1 2] [1 2] [3 4] [1 2]])
   )
 
 (tests
