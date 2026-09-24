@@ -11,13 +11,13 @@
 
 (defn a [seq]
   (reduce (fn [acc b]
-            (concat acc (take 2 (repeat b)))) [] seq))
+            (concat acc (repeat 2 b))) nil seq))
 (defn b [seq]
   (reverse (reduce #(conj %1 %2 %2) nil seq)))
 
 (def c #(interleave % %))
 
-(def __ c)
+(def __ a)
 
 (comment
   (a [1 2 3])
@@ -25,6 +25,7 @@
   (interleave [1 2 3] [1 2 3])
   (interpose \, [1 2 3])
   (mapcat #(list % %) [1 2 3])
+  (concat nil [1 2])
   ((partial mapcat (partial repeat 2)) [1 2 3])
   :rcf)
 
