@@ -9,11 +9,38 @@
 ;; Write a function which replicates each element of a
 ;; sequence a variable number of times.
 
-(def __ :tests-will-fail)
+(def __ d)
+
+(defn a [seq n]
+  (mapcat #(repeat n %) seq))
+
+(defn b [seq n]
+  (->> seq
+       (map #(repeat n %))
+            (apply concat)))
+
+(defn c [seq n]
+  (->> seq
+       (reduce (fn [acc a] (apply (partial conj acc) (repeat n a))) '())
+       reverse))
+
+(defn d [seq n]
+  (apply interleave (repeat n seq)))
 
 (comment
   
-  )
+  (mapcat #(repeat 2 %) [1 2 3])
+  (->> [1 2 3]
+       (map #(repeat 2 %))
+       (apply concat))
+  (->> [1 2 3]
+       (reduce (fn [acc a] (apply (partial conj acc) (repeat 2 a))) '())
+       reverse
+       )
+  (apply interleave (repeat 2 [1 2 3]))
+  :rcf)
+  
+  
 
 (tests
   (__ [1 2 3] 2) := '(1 1 2 2 3 3)
