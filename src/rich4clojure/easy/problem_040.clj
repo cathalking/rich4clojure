@@ -11,10 +11,21 @@
 
 (def restricted [interpose])
 
-(def __ :tests-will-fail)
+(def __ b)
+(defn a [sep coll]
+  (reduce (fn [acc a]
+            (if (empty? acc)
+              (conj acc a)
+              (conj acc sep a))) 
+          [] coll))
+(defn b [sep coll]
+  (butlast (mapcat list coll (repeat sep))))
 
 (comment
-  
+  (a 0 [1 2 3])
+  (a :z [:a :b :c :d])
+  (butlast (mapcat list [1 2 3] (repeat 0)))
+  (map list [1 2 3] (repeat 0))
   )
 
 (tests
