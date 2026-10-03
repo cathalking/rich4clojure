@@ -8,10 +8,32 @@
 ;; 
 ;; Write a function which calculates factorials.
 
-(def __ :tests-will-fail)
+(def __ d)
+
+(defn a [n]
+  (loop [i 1
+         acc 1]
+    (if (> i n)
+      acc
+      (recur (inc i) (* acc i)))))
+
+(defn b [n]
+  (reduce (fn [acc a]
+            (* acc a)) 1 (range 1 (inc n))))
+
+(defn c [n]
+  (reduce * (range 1 (inc n))))
+
+(defn d [n]
+  (apply * (range 1 (inc n))))
 
 (comment
-  
+(* 1 2 3 4 5 6 7 8)
+;;=> 40320
+(a 8)  
+(b 5)  
+(c 5)  
+(d 5)  
   )
 
 (tests
