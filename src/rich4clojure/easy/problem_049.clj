@@ -11,10 +11,12 @@
 
 (def restricted [split-at])
 
-(def __ :tests-will-fail)
+(def __ a)
+
+(defn a [n coll]
+  [(take n coll) (drop n coll)])
 
 (comment
-  
   )
 
 (tests
