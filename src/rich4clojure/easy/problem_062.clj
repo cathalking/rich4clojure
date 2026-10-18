@@ -12,10 +12,15 @@
 
 (def restricted [iterate])
 
-(def __ :tests-will-fail)
+(def __ my-iterate)
+
+(defn my-iterate [f x]
+  (lazy-seq (cons x (my-iterate f (f x))))
+  )
 
 (comment
-  
+  (take 5 (a #(* 2 %) 1))
+  delay
   )
 
 (tests
