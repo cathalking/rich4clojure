@@ -11,9 +11,25 @@
 
 (def restricted [zipmap])
 
-(def __ :tests-will-fail)
+(def __ b)
+
+(defn a [ks vs]
+  (apply assoc {} (interleave ks vs)))
+
+(defn b [ks vs]
+  (into {} (map vector ks vs)))
+
 
 (comment
+  (update-in {:a {:b 0 :c 1}} [:a] dissoc :b)
+
+  (into {} [[:a 1] [:b 2]])
+  (apply assoc {} 
+         )
+  (interleave [:a :b] [1 2])
+  ;;=> (:a 1 :b 2)
+  (map vector [:a :b] [1 2])
+  ;;=> ([:a 1] [:b 2])
   
   )
 
