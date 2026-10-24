@@ -12,9 +12,35 @@
 
 (def restricted [intersection])
 
-(def __ :tests-will-fail)
+(def __ b)
 
+(defn a [sx sy]
+  (let [[s1 s2] (if (<= (count sx) (count sy))
+                  [sx sy]
+                  [sy sx])]
+    (->>
+     (keep #(when (s2 %) %) s1)
+     set)
+    )
+  )
+
+(defn b [sx sy] 
+  (set (filter sx sy)))
+
+  (def sx #{0 1 2 3})
+  (def sy #{2 3 4 5})
 (comment
+  (let [[s1 s2] (if (<= (count sx) (count sy))
+                  [sx sy]
+                  [sy sx])]
+    ;; [s1 s2]
+    (->>
+     ;; (keep #(when (contains? sy %) %) sx)
+     (keep #(when (s2 %) %) s1)
+     set)
+    )
+  ;;=> [#{0 1 3 2} #{4 3 2 5}]
+  (filter sy sx)
   
   )
 
