@@ -10,10 +10,26 @@
 ;; the parameters are true, but not all of the parameters
 ;; are true. Otherwise your function should return false.
 
-(def __ :tests-will-fail)
+(def __ b)
+
+(defn a [& bs]
+  (= #{true false}
+     (set bs)))
+
+(defn b [& bs]
+  (apply not= bs))
 
 (comment
-  
+  (def bs [true false true])
+  (apply a bs)
+  (apply a bs)
+  (a true false true)
+  (a false true)
+  (b true true true)
+  (b true)
+  (b true false true)
+  (b false true)
+  (= #{true false} #{true false})
   )
 
 (tests

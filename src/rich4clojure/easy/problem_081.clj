@@ -48,7 +48,11 @@
   ;;=> (1 3)
   (set (filter odd? #{1 2 3}))
   ;;=> #{1 3}
-
+  
+  (->>
+   (filter #(= :login (:event %)) [{:event :login :user "jane"}
+                                   {:event :logout :user "jane"}])
+   vec)
   )
 
 (tests
