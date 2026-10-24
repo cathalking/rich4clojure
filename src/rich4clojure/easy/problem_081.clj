@@ -16,14 +16,9 @@
 (def __ c)
 
 (defn a [sx sy]
-  (let [[s1 s2] (if (<= (count sx) (count sy))
-                  [sx sy]
-                  [sy sx])]
     (->>
-     (keep #(when (s2 %) %) s1)
-     set)
-    )
-  )
+     (keep #(when (sx %) %) sy)
+     set))
 
 (defn b [sx sy] 
   (set (filter sx sy)))
