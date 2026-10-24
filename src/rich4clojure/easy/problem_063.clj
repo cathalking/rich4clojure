@@ -23,11 +23,11 @@
      {} ms)))
     
 (defn b [f s]
-  (let [es (map (fn [x] [(f x) x]) s)]
+  (let [kvs (map (fn [x] [(f x) x]) s)]
     (reduce 
      ;;(fn [acc [k v]] (update acc k conj v)) 
      (fn [acc [k v]] (update acc k (fnil conj []) v)) 
-     {} es)))
+     {} kvs)))
 
 (comment
   (let [f even?
