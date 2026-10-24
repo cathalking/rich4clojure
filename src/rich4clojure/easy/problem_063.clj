@@ -64,6 +64,12 @@
    into {:a [1]} {:a [2]})
   (merge-with
    concat {:a [1]} {:a [2]})
+  (update {} true conj 1)
+  ;;=> {true (1)}
+  (conj nil 1)
+  ;;=> (1)
+  (update {} true (fnil conj []) 1)
+  ;;=> {true [1]}
   )
   ;;=> {:a [1 2]}
   
