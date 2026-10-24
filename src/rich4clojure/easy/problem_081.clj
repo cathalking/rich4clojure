@@ -1,5 +1,6 @@
 (ns rich4clojure.easy.problem-081
-  (:require [hyperfiddle.rcf :refer [tests]]))
+  (:require [hyperfiddle.rcf :refer [tests]]
+            [clojure.set :refer [select]]))
 
 ;; = Set Intersection =
 ;; By 4Clojure user: dbyrne
@@ -12,7 +13,7 @@
 
 (def restricted [intersection])
 
-(def __ b)
+(def __ c)
 
 (defn a [sx sy]
   (let [[s1 s2] (if (<= (count sx) (count sy))
@@ -27,8 +28,12 @@
 (defn b [sx sy] 
   (set (filter sx sy)))
 
-  (def sx #{0 1 2 3})
-  (def sy #{2 3 4 5})
+(defn c [s1 s2]
+  (select s1 s2))
+
+(def sx #{0 1 2 3})
+(def sy #{2 3 4 5})
+
 (comment
   (let [[s1 s2] (if (<= (count sx) (count sy))
                   [sx sy]
@@ -42,6 +47,13 @@
   ;;=> [#{0 1 3 2} #{4 3 2 5}]
   (filter sy sx)
   
+  (clojure.set/select odd? #{1 2 3})
+  ;;=> #{1 3}
+  (filter odd? #{1 2 3})
+  ;;=> (1 3)
+  (set (filter odd? #{1 2 3}))
+  ;;=> #{1 3}
+
   )
 
 (tests
