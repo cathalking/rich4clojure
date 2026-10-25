@@ -9,9 +9,22 @@
 ;; Write a function which calculates the Cartesian product
 ;; of two sets.
 
-(def __ :tests-will-fail)
+(def __ a)
+
+(defn a [s1 s2]
+  (into #{}
+   (for [x s1
+         y s2]
+     [x y])))
 
 (comment
+  (set
+   (for [x [1 2 3]
+         y [4 5]]
+     [x y]
+     ))
+   ;;=> ([1 4] [1 5] [2 4] [2 5] [3 4] [3 5])
+  ;;=> #{[2 5] [3 4] [1 4] [1 5] [2 4] [3 5]}
   
   )
 
