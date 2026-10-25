@@ -1,5 +1,6 @@
 (ns rich4clojure.easy.problem-088
-  (:require [hyperfiddle.rcf :refer [tests]]))
+  (:require [hyperfiddle.rcf :refer [tests]]
+            [clojure.set :refer [union select]]))
 
 ;; = Symmetric Difference =
 ;; By 4Clojure user: dbyrne
@@ -10,10 +11,22 @@
 ;; of two sets. The symmetric difference is the set of
 ;; items belonging to one but not both of the two sets.
 
-(def __ :tests-will-fail)
+(def __ a)
+
+(defn a [s1 s2]
+  (select #(not= (s1 %) (s2 %)) (union s1 s2))) 
 
 (comment
+  (def s1 #{1 2 3 4 5 6}) 
+  (def s2 #{1 3 5 7})
+  (def u
+    (union s1 s2))
   
+  (filter (fn [x] (let [c1 (s1 x)
+                        c2 (s2 x)]
+                    (not= c1 c2))) u)
+  (select #(not= (s1 %) (s2 %)) u) 
+  (a s1 s2)
   )
 
 (tests
