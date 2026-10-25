@@ -1,6 +1,6 @@
 (ns rich4clojure.easy.problem-088
   (:require [hyperfiddle.rcf :refer [tests]]
-            [clojure.set :refer [union select]]))
+            [clojure.set :refer [union select intersection difference]]))
 
 ;; = Symmetric Difference =
 ;; By 4Clojure user: dbyrne
@@ -14,7 +14,16 @@
 (def __ a)
 
 (defn a [s1 s2]
+  (set (filter #(not= (s1 %) (s2 %)) (concat s1 s2)))) 
+
+(defn b [s1 s2]
   (select #(not= (s1 %) (s2 %)) (union s1 s2))) 
+
+(defn c [s1 s2]
+  (apply disj (union s1 s2) (filter s1 s2)))
+
+(defn d [s1 s2]
+  (difference (union s1 s2) (intersection s1 s2)))
 
 (comment
   (def s1 #{1 2 3 4 5 6}) 
@@ -22,11 +31,21 @@
   (def u
     (union s1 s2))
   
+  (apply disj u (filter s1 s2))
   (filter (fn [x] (let [c1 (s1 x)
                         c2 (s2 x)]
                     (not= c1 c2))) u)
   (select #(not= (s1 %) (s2 %)) u) 
+  (filter s1 s2)
+  ;;=> (1 3 5)
+  (intersection s1 s2)
+  ;;=> #{1 3 5}
+
   (a s1 s2)
+  (b s1 s2)
+  (c s1 s2)
+  (d s1 s2)
+
   )
 
 (tests
