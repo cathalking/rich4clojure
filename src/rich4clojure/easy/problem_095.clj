@@ -12,14 +12,31 @@
 ;; tree must have a value, a left child, and a right
 ;; child.
 
-(def __ b)
+(def __ c)
 (seq? nil)
 ;;=> false
 (seqable? nil)
 ;;=> true
+(seqable? ())
+;;=> true
+(seqable? [])
+;;=> true
+(seqable? "abcdefg")
+;;=> true
 (seqable? false)
 ;;=> false
 (some? false)
+
+(sequential? nil)
+;;=> false
+(sequential? ())
+;;=> true
+(sequential? [])
+;;=> true
+(sequential? "abcdefg")
+;;=> false
+(sequential? false)
+;;=> false
 
 (defn a [[_ y z :as s]]
   (and 
@@ -32,8 +49,8 @@
      (boolean
       (and (seq z)
            (a z)))
-     true) 
-   ))
+     true))) 
+   
 
 (defn b [[_ y z :as s]]
   (and 
@@ -43,50 +60,48 @@
        (b y))
    (seqable? z) 
    (or (nil? z)
-       (b z))
-   ))
+       (b z))))
+   
+(defn c [s]
+  (or (nil? s)
+      (and (sequential? s)
+           (= 3 (count s))
+           (c (nth s 1))
+           (c (nth s 2)))))
 
-(comment
-  (b '(:a (:b nil nil) nil))
+  
+  (comment
+    (c '(:a (:b nil nil) nil))
   ; true
-  (b '(:a (:b nil nil)))
+    (c '(:a (:b nil nil)))
   ; false
-  (b [1 nil [2 [3 nil nil] [4 nil nil]]])
+    (c [1 nil [2 [3 nil nil] [4 nil nil]]])
   ; true
-  (b [1 [2 nil nil] [3 nil nil] [4 nil nil]])
+    (c [1 [2 nil nil] [3 nil nil] [4 nil nil]])
   ; false
-  (b [1 [2 [3 [4 nil nil] nil] nil] nil])
+    (c [1 [2 [3 [4 nil nil] nil] nil] nil])
   ; true
-  (b [1 [2 [3 [4 false nil] nil] nil] nil])
-  ; true
-  (b '(:a (:b nil nil) ()))
+    (c [1 [2 [3 [4 false nil] nil] nil] nil])
   ; false
-  (b '(:a nil ()))
+    (c '(:a (:b nil nil) ()))
   ; false
-  (loop [[x y z :as s] '(:a (:b nil nil) nil)
-         acc []
-         #_'(:a (:b nil nil) '())]
-    (do 
-      
-      (recur y acc)
-      )
-    )
-  (loop [[x y z :as s] '(:a (:b nil nil) nil)
-         #_'(:a (:b nil nil) '())]
-    (cond
-      (not= 3 (count s)) false
-      (seq? x) (if (empty? x)
-                 false
-                 (recur x))
-      (seq? y) (if (empty? y)
-                 false
-                 (recur y))
-      (seq? z) (if (empty? z)
-                 false
-                 (recur z))
-      :else true))
-
-  )
+    (c '(:a nil ()))
+  ; false
+    
+    (loop [[x y z :as s] '(:a (:b nil nil) nil)
+           #_'(:a (:b nil nil) '())]
+      (cond
+        (not= 3 (count s)) false
+        (seq? x) (if (empty? x)
+                   false
+                   (recur x))
+        (seq? y) (if (empty? y)
+                   false
+                   (recur y))
+        (seq? z) (if (empty? z)
+                   false
+                   (recur z))
+        :else true)))
 
 (tests
   (__ '(:a (:b nil nil) nil)) :=
